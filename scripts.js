@@ -18,7 +18,6 @@ StopButton.onclick = () => {
     timeLeft.style.color = "white";
     StopButton.classList.remove("visible")
     timeLeft.classList.remove("over")
-    timeEnd.classList.remove("over")
 }
 function handleMinuteBox(event) {
     if(event.keyCode == 13){
@@ -91,12 +90,8 @@ function timer(time) {
             intervalIdTimeOver = setInterval(() => {
                 if(timerEndedSound.ended) timerEndedSound.play();
                 timeLeft.classList.add("over")
-                timeEnd.classList.add("over")
-                StopButton.classList.add("time-over")
                 setTimeout(() => {
                     timeLeft.classList.remove("over")
-                    timeEnd.classList.remove("over")
-                    StopButton.classList.remove("time-over")
                 },500)
             },1000)
         }

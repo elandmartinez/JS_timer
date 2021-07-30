@@ -22,14 +22,11 @@ html {
     margin: 0;
     color: white;
     text-shadow: 4px 4px 0 rgba(0,0,0,0.05);
+    margin-bottom: 50px;
   }
   
   .display__time-left.over {
-    display: none;
-  }
-
-  .display__end-time.over {
-    transform: translateY(73px);
+    opacity: 0;
   }
 
   .timer {
@@ -52,6 +49,7 @@ html {
   }
   
   .Stop-timer-button {
+    margin: 40px;
     font-size: 2rem;
     display: none;
     width: 200px;
@@ -61,19 +59,15 @@ html {
     background-color: rgba(255,255,255,0);
     border-radius: 20px;
     border: 1px solid white;
+    position: absolute;
   }
 
   .Stop-timer-button.visible {
-    margin-top: 20px;
     display: inline;
   }
 
   .Stop-timer-button:active {
     background-color: rgba(255, 255, 255, 0.5);
-  }
-
-  .Stop-timer-button.time-over {
-    transform: translateY(73px);
   }
 
   .timer__controls input {
