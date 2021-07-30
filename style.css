@@ -9,6 +9,7 @@ html {
     box-sizing: inherit;
   }
   
+
   body {
     margin: 0;
     text-align: center;
@@ -23,6 +24,14 @@ html {
     text-shadow: 4px 4px 0 rgba(0,0,0,0.05);
   }
   
+  .display__time-left.over {
+    display: none;
+  }
+
+  .display__end-time.over {
+    transform: translateY(73px);
+  }
+
   .timer {
     display: flex;
     min-height: 100vh;
@@ -42,6 +51,31 @@ html {
     display: flex;
   }
   
+  .Stop-timer-button {
+    font-size: 2rem;
+    display: none;
+    width: 200px;
+    height: 40px;
+    color: white;
+    text-align: center;
+    background-color: rgba(255,255,255,0);
+    border-radius: 20px;
+    border: 1px solid white;
+  }
+
+  .Stop-timer-button.visible {
+    margin-top: 20px;
+    display: inline;
+  }
+
+  .Stop-timer-button:active {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .Stop-timer-button.time-over {
+    transform: translateY(73px);
+  }
+
   .timer__controls input {
     flex: 1;
     border: 0;

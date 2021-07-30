@@ -2,13 +2,24 @@ const timerButtons = document.querySelectorAll(".timer__button");
 const timeLeft = document.querySelector(".display__time-left");
 const timeEnd = document.querySelector(".display__end-time");
 const minuteBox = document.querySelector("[name=minutes]");
-const form = document.querySelector("#custom")
-let intervalId;
+const form = document.querySelector("#custom");
+const timerEndedSound = document.querySelector(".timerEndedSound")
+const StopButton = document.querySelector(".Stop-timer-button")
+let intervalIdTimeOn;
+let intervalIdTimeOver;
 let actualHours;
 let actualMinutes;
 let actualSeconds;
 const secondsInDay = (60 * 60) * 24;
 
+StopButton.onclick = () => {
+    clearInterval(intervalIdTimeOver)
+    timerEndedSound.pause();
+    timeLeft.style.color = "white";
+    StopButton.classList.remove("visible")
+    timeLeft.classList.remove("over")
+    timeEnd.classList.remove("over")
+}
 function handleMinuteBox(event) {
     if(event.keyCode == 13){
         
@@ -47,7 +58,11 @@ timerButtons.forEach(button => {
 })
 
 function timer(time) {
-    clearInterval(intervalId);
+    clearInterval(intervalIdTimeOn);
+    clearInterval(intervalIdTimeOver)
+    timerEndedSound.pause();
+    timeLeft.style.color = "white";
+    StopButton.classList.remove("visible")
 
     if(time > secondsInDay) {
         alert("the max amount of time for the timer is 24 minutes (1440 minutes)")
@@ -65,10 +80,25 @@ function timer(time) {
     let seconds;
     let actualHours = date.getHours();
     let actualMinutes = date.getMinutes();
-    intervalId = setInterval(() => {
+    intervalIdTimeOn = setInterval(() => {
 
         if(time == 0) {
-            clearInterval(intervalId);
+            clearInterval(intervalIdTimeOn);
+            console.log("time over")
+            timeLeft.style.color = "red";
+            StopButton.classList.add("visible")
+            timerEndedSound.play();
+            intervalIdTimeOver = setInterval(() => {
+                if(timerEndedSound.ended) timerEndedSound.play();
+                timeLeft.classList.add("over")
+                timeEnd.classList.add("over")
+                StopButton.classList.add("time-over")
+                setTimeout(() => {
+                    timeLeft.classList.remove("over")
+                    timeEnd.classList.remove("over")
+                    StopButton.classList.remove("time-over")
+                },500)
+            },1000)
         }
 
         hours = Math.floor(time / 3600);
